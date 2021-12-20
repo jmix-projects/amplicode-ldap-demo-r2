@@ -1,0 +1,42 @@
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5432/new-ldap-demo
+    username: postgres
+    password: postgres
+    driver-class-name: org.postgresql.Driver
+  jpa:
+    show-sql: true
+    hibernate:
+      ddl-auto: update
+amplicode:
+  ldap:
+    base-dn: dc=example,dc=com # todo
+    urls: ldap://localhosts:10389 # todo
+    master-user-dn: 'uid=admin,ou=system' # todo
+    master-user-password: secret # todo
+    enable-ldap-auth: on
+    standard-authentication-users: admin, system
+    user-props:
+      search-base: ou=users # delete
+      username-attr: uid # delete
+    group-props:
+      member-attr: member # delete
+      name-attr: cn # delete
+      search-base: ou=groups # delete
+    authorities-populator:
+      search-in-subtrees: false
+      convert-role-to-upper-case: true
+      authority-name-prefix: ''
+    synchronization:
+      perform-from-groups:
+        - 'cn=developers,ou=groups,dc=example,dc=com'
+        - 'cn=managers,ou=groups,dc=example,dc=com'
+      enabled: on
+      enabled-on-login: on
+    db-logging:
+      level: info
+      enabled: true
+      logging-scopes: security, synchronization, listener
+logging:
+  level:
+    com.amplicode: trace

@@ -1,0 +1,3 @@
+rootProject.name = 'amplicode-ldap-demo-r2'
+
+include 'frontend'
