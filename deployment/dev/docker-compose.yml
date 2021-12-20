@@ -5,8 +5,8 @@ networks:
     driver: bridge
 
 services:
-  postgres-12:
-    container_name: postgres-12
+  backend-postgres-12:
+    container_name: backend-postgres-12
     image: postgres:12
     restart: unless-stopped
     environment:
@@ -20,13 +20,13 @@ services:
 
   amplicode-ldap-be:
     container_name: amplicode-ldap-be
-#    build:
-#      context: ../../
-#      dockerfile: Dockerfile
+    build:
+      context: ../../
+      dockerfile: Dockerfile
     image: amplicode-ldap-demo-r2:latest
     restart: unless-stopped
     environment:
-      RDS_HOSTNAME: postgres-12
+      RDS_HOSTNAME: backend-postgres-12
       RDS_PASSWORD: ${DB_PASSWORD}
       RDS_USERNAME: ${DB_USERNAME}
       RDS_DB_NAME: ${DB_NAME}
@@ -35,7 +35,7 @@ services:
     ports:
       - "8083:8080"
     depends_on:
-      - postgres-12
+      - backend-postgres-12
     networks:
       - amplicode-ldap-net
 
