@@ -1,28 +1,28 @@
 spring:
   datasource:
-    url: jdbc:postgresql://localhost:5432/new-ldap-demo
-    username: postgres
-    password: postgres
+    url: jdbc:postgresql://localhost:5432/amplicode-ldap-demo
+    username: root
+    password: root
     driver-class-name: org.postgresql.Driver
   jpa:
     show-sql: true
     hibernate:
-      ddl-auto: update
+      ddl-auto: none
 amplicode:
   ldap:
-    base-dn: dc=example,dc=com # todo
-    urls: ldap://localhosts:10389 # todo
-    master-user-dn: 'uid=admin,ou=system' # todo
-    master-user-password: secret # todo
+    base-dn: dc=example,dc=com
+    urls: ldap://localhost:10389
+    master-user-dn: 'uid=admin,ou=system'
+    master-user-password: secret
     enable-ldap-auth: on
     standard-authentication-users: admin, system
     user-props:
-      search-base: ou=users # delete
-      username-attr: uid # delete
+      search-base: ou=users
+      username-attr: uid
     group-props:
-      member-attr: member # delete
-      name-attr: cn # delete
-      search-base: ou=groups # delete
+      member-attr: member
+      name-attr: cn
+      search-base: ou=groups
     authorities-populator:
       search-in-subtrees: false
       convert-role-to-upper-case: true

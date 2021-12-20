@@ -9,7 +9,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.EnvironmentAware;
 import org.springframework.context.annotation.Bean;
+import org.springframework.core.env.Environment;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 //import org.springframework.security.core.userdetails.User;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -22,7 +24,7 @@ import java.util.Collections;
 
 @RequiredArgsConstructor
 @SpringBootApplication
-public class NewLdapAddonDemoApplication implements CommandLineRunner {
+public class NewLdapAddonDemoApplication implements CommandLineRunner, EnvironmentAware {
 
     final UserDetailsManager manager;
     final TransactionTemplate tt;
@@ -30,13 +32,11 @@ public class NewLdapAddonDemoApplication implements CommandLineRunner {
     final PasswordEncoder passwordEncoder;
 
     public static void main(String[] args) {
-        System.setProperty("user.timezone", "Asia/Kolkata");
         SpringApplication.run(NewLdapAddonDemoApplication.class, args);
     }
 
     @Override
     public void run(String... args) {
-//        synchronizationManager.synchronizeUsers();
         tt.executeWithoutResult(status -> {
             if (!manager.userExists("admin")) {
                 User user = new User();
@@ -48,5 +48,10 @@ public class NewLdapAddonDemoApplication implements CommandLineRunner {
                 manager.createUser(user);
             }
         });
+    }
+
+    @Override
+    public void setEnvironment(Environment environment) {
+        System.out.println(environment.getProperty("spring.datasource.url"));
     }
 }

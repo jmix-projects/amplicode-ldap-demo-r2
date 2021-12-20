@@ -1,16 +1,41 @@
-version: '3.9'
+version: "3.9"
 
 networks:
-  amplicode-ldap:
+  amplicode-ldap-net:
     driver: bridge
 
 services:
-  postgres:
-    image: postgres:13.3
+  postgres-12:
+    container_name: postgres-12
+    image: postgres:12
+    restart: unless-stopped
     environment:
-      POSTGRES_DB: "habrdb"
-      POSTGRES_USER: "habrpguser"
-      POSTGRES_PASSWORD: "pgpwd4habr"
+      POSTGRES_PASSWORD: ${DB_PASSWORD}
+      POSTGRES_USER: ${DB_USERNAME}
+      POSTGRES_DB: ${DB_NAME}
     ports:
       - "5432:5432"
+    networks:
+      - amplicode-ldap-net
+
+  amplicode-ldap-be:
+    container_name: amplicode-ldap-be
+#    build:
+#      context: ../../
+#      dockerfile: Dockerfile
+    image: amplicode-ldap-demo-r2:latest
+    restart: unless-stopped
+    environment:
+      RDS_HOSTNAME: postgres-12
+      RDS_PASSWORD: ${DB_PASSWORD}
+      RDS_USERNAME: ${DB_USERNAME}
+      RDS_DB_NAME: ${DB_NAME}
+      RDS_PORT: 5432
+      SPRING_PROFILES_ACTIVE: dev_docker
+    ports:
+      - "8083:8080"
+    depends_on:
+      - postgres-12
+    networks:
+      - amplicode-ldap-net
 
