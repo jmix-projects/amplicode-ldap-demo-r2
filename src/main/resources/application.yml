@@ -4,18 +4,13 @@ spring:
     username: root
     password: root
     driver-class-name: org.postgresql.Driver
-  jpa:
-    show-sql: true
-    hibernate:
-      ddl-auto: none
 amplicode:
   ldap:
-    base-dn: dc=example,dc=com
-    urls: ldap://localhost:10389
+    base-dn: dc=amplicode,dc=com
+    urls: ldap://localhost:1389
     master-user-dn: 'uid=admin,ou=system'
-    master-user-password: secret
-    enable-ldap-auth: on
-    standard-authentication-users: admin, system
+    master-user-password: admin
+    standard-authentication-users: admin
     user-props:
       search-base: ou=users
       username-attr: uid
@@ -23,18 +18,13 @@ amplicode:
       member-attr: member
       name-attr: cn
       search-base: ou=groups
-    authorities-populator:
-      search-in-subtrees: false
-      convert-role-to-upper-case: true
-      authority-name-prefix: ''
     synchronization:
       perform-from-groups:
-        - 'cn=developers,ou=groups,dc=example,dc=com'
-        - 'cn=managers,ou=groups,dc=example,dc=com'
-      enabled: on
-      enabled-on-login: on
+        - 'cn=developers,ou=groups,dc=amplicode,dc=com'
+        - 'cn=managers,ou=groups,dc=amplicode,dc=com'
+      enabled: true
+      enabled-on-login: true
     db-logging:
-      level: info
       enabled: true
       logging-scopes: security, synchronization, listener
 logging:

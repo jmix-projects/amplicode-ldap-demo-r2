@@ -1,4 +1,4 @@
-package org.demo.db.user.management;
+package com.sample.user.management;
 
 import lombok.SneakyThrows;
 import org.springframework.security.core.GrantedAuthority;

@@ -4,3 +4,30 @@ spring:
     username: ${RDS_USERNAME}
     password: ${RDS_PASSWORD}
     driver-class-name: org.postgresql.Driver
+amplicode:
+  ldap:
+    base-dn: ${LDAP_BASE_DN}
+    urls: ldap://${LDAP_HOSTNAME}:${LDAP_PORT}
+    master-user-dn: cn=${LDAP_ADMIN_USERNAME},${LDAP_BASE_DN}
+    master-user-password: ${LDAP_ADMIN_PASSWORD}
+    standard-authentication-users: admin
+    user-props:
+      search-base: ou=users
+      username-attr: uid
+    group-props:
+        member-attr: member
+        name-attr: cn
+        search-base: ou=groups
+    synchronization:
+        enabled: true
+        enabled-on-login: true
+        perform-from-groups:
+          - 'cn=developers,ou=groups,${LDAP_BASE_DN}'
+          - 'cn=managers,ou=groups,${LDAP_BASE_DN}'
+    db-logging:
+        level: info
+        enabled: true
+        logging-scopes: security, synchronization, listener
+logging:
+  level:
+    com.amplicode: trace

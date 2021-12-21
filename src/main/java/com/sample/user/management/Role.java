@@ -1,10 +1,9 @@
-package org.demo.db.user.management;
+package com.sample.user.management;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.hibernate.Hibernate;
-import org.hibernate.annotations.SQLInsert;
 import org.springframework.security.core.GrantedAuthority;
 
 import javax.persistence.Column;

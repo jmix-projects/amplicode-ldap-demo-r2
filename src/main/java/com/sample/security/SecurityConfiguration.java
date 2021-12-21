@@ -1,6 +1,5 @@
-package org.demo.security;
+package com.sample.security;
 
-import org.springframework.http.HttpMethod;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -24,7 +23,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
             .and()
                 .csrf().disable()
             .authorizeRequests()
-                .antMatchers("/graphiql").permitAll()
+                .antMatchers("/graphiql").authenticated()
                 .antMatchers("/graphql", "/graphql/**").permitAll()
             .and()
                 .httpBasic();

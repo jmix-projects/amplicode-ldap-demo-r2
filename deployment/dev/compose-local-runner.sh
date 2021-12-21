@@ -2,5 +2,5 @@
 
 cd ../../
 ./gradlew clean build -x test
-cd deployment/dev
+cd deployment/dev/
 docker-compose up

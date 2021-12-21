@@ -1,38 +1,28 @@
-package org.demo;
+package com.sample;
 
 
-import com.amplicode.ldap.synchronization.LdapUsersSynchronizationManager;
+import com.sample.user.management.Role;
+import com.sample.user.management.User;
 import lombok.RequiredArgsConstructor;
-import org.demo.db.user.management.Role;
-import org.demo.db.user.management.User;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.context.EnvironmentAware;
-import org.springframework.context.annotation.Bean;
-import org.springframework.core.env.Environment;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
-//import org.springframework.security.core.userdetails.User;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 import org.springframework.security.provisioning.UserDetailsManager;
 import org.springframework.transaction.support.TransactionTemplate;
-import org.springframework.util.ClassUtils;
 
 import java.util.Collections;
 
 @RequiredArgsConstructor
 @SpringBootApplication
-public class NewLdapAddonDemoApplication implements CommandLineRunner, EnvironmentAware {
+public class AmplicodeLdapDemoR2 implements CommandLineRunner {
 
     final UserDetailsManager manager;
     final TransactionTemplate tt;
-    final LdapUsersSynchronizationManager synchronizationManager;
     final PasswordEncoder passwordEncoder;
 
     public static void main(String[] args) {
-        SpringApplication.run(NewLdapAddonDemoApplication.class, args);
+        SpringApplication.run(AmplicodeLdapDemoR2.class, args);
     }
 
     @Override
@@ -48,10 +38,5 @@ public class NewLdapAddonDemoApplication implements CommandLineRunner, Environme
                 manager.createUser(user);
             }
         });
-    }
-
-    @Override
-    public void setEnvironment(Environment environment) {
-        System.out.println(environment.getProperty("spring.datasource.url"));
     }
 }

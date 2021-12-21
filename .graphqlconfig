@@ -1,9 +1,9 @@
 {
-  "name": "Jmix GraphQL",
+  "name": "Amplicode LDAP GraphQL",
   "extensions": {
     "endpoints": {
       "Default GraphQL Endpoint": {
-        "url": "http://localhost:8080/graphql",
+        "url": "http://localhost:8083/graphql",
         "headers": {
           "user-agent": "JS GraphQL",
           "Authorization": "bearer"

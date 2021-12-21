@@ -1,4 +1,4 @@
-package org.demo.db.user.management;
+package com.sample.user.management;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
