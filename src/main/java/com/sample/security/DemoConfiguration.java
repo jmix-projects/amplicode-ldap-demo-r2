@@ -6,6 +6,7 @@ import org.springframework.security.crypto.factory.PasswordEncoderFactories;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 @Configuration
+//TODO:
 public class DemoConfiguration {
 
     @Bean

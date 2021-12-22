@@ -3,7 +3,6 @@ spring:
     url: jdbc:postgresql://${RDS_HOSTNAME}:${RDS_PORT}/${RDS_DB_NAME}
     username: ${RDS_USERNAME}
     password: ${RDS_PASSWORD}
-    driver-class-name: org.postgresql.Driver
 amplicode:
   ldap:
     base-dn: ${LDAP_BASE_DN}
@@ -24,10 +23,4 @@ amplicode:
         perform-from-groups:
           - 'cn=developers,ou=groups,${LDAP_BASE_DN}'
           - 'cn=managers,ou=groups,${LDAP_BASE_DN}'
-    db-logging:
-        level: info
-        enabled: true
-        logging-scopes: security, synchronization, listener
-logging:
-  level:
-    com.amplicode: trace
+

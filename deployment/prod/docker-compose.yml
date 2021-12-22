@@ -1,4 +1,4 @@
-version: "3.9"
+version: '3'
 
 networks:
   amplicode-addons-ldap-demo-r2-net:
@@ -10,11 +10,9 @@ services:
     image: postgres:12
     restart: unless-stopped
     environment:
-      POSTGRES_PASSWORD: ${DB_PASSWORD}
-      POSTGRES_USER: ${DB_USERNAME}
-      POSTGRES_DB: ${DB_NAME}
-    ports:
-      - "5432:5432"
+      POSTGRES_PASSWORD: ${GRANT2_PASSWORD}
+      POSTGRES_USER: ${GRANT2_USERNAME}
+      POSTGRES_DB: ${GRANT2_NAME}
     networks:
       - amplicode-addons-ldap-demo-r2-net
 
@@ -28,35 +26,32 @@ services:
       LDAP_CUSTOM_LDIF_DIR: "etc/ldifs"
     restart: unless-stopped
     volumes:
-      - "../ldifs:/etc/ldifs/"
-    ports:
-      - "1389:1389"
-      - "1636:1636"
+      - '../ldifs:/etc/ldifs/'
     networks:
       - amplicode-addons-ldap-demo-r2-net
 
   amplicode-addons-ldap-demo-r2:
     container_name: amplicode-addons-ldap-demo-r2
-    image: amplicode-addons-ldap-demo-r2:full
+    image: docker.haulmont.com/platform/infrastructure/demo-cuba-apps-docker/demo-r2/amplicode-addons-ldap-demo-r2:full
     restart: unless-stopped
     environment:
       RDS_HOSTNAME: amplicode-addons-ldap-demo-r2-postgres-12
-      RDS_PASSWORD: ${DB_PASSWORD}
-      RDS_USERNAME: ${DB_USERNAME}
-      RDS_DB_NAME: ${DB_NAME}
+      RDS_PASSWORD: ${GRANT2_PASSWORD}
+      RDS_USERNAME: ${GRANT2_USERNAME}
+      RDS_DB_NAME: ${GRANT2_NAME}
       RDS_PORT: 5432
       LDAP_BASE_DN: ${LDAP_ROOT}
       LDAP_ADMIN_USERNAME: ${LDAP_ADMIN_USERNAME}
       LDAP_ADMIN_PASSWORD: ${LDAP_ADMIN_PASSWORD}
       LDAP_HOSTNAME: amplicode-addons-ldap-demo-r2-openldap
       LDAP_PORT: 1389
-      SPRING_PROFILES_ACTIVE: dev_docker
+      SPRING_PROFILES_ACTIVE: docker
       APP_USERS_ADMIN_USERNAME: ${JMIX_ADMIN}
       APP_USERS_ADMIN_PASSWORD: ${JMIX_PASSWORD}
     depends_on:
       - amplicode-addons-ldap-demo-r2-postgres-12
       - amplicode-addons-ldap-demo-r2-openldap
     ports:
-      - "8083:8080"
+      - "8087:8080"
     networks:
       - amplicode-addons-ldap-demo-r2-net

@@ -7,6 +7,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.context.properties.ConfigurationPropertiesScan;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.provisioning.UserDetailsManager;
 import org.springframework.transaction.support.TransactionTemplate;
@@ -15,6 +16,7 @@ import java.util.Collections;
 
 @RequiredArgsConstructor
 @SpringBootApplication
+@ConfigurationPropertiesScan
 public class AmplicodeLdapDemoR2 implements CommandLineRunner {
 
     final UserDetailsManager manager;
