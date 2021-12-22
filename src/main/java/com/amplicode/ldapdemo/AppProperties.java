@@ -1,4 +1,4 @@
-package com.sample;
+package com.amplicode.ldapdemo;
 
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.web.cors.CorsConfiguration;

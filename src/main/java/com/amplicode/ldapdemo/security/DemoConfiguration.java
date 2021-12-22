@@ -1,4 +1,4 @@
-package com.sample.security;
+package com.amplicode.ldapdemo.security;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

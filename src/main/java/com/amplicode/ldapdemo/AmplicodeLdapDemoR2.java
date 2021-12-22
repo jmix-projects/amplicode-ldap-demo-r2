@@ -1,8 +1,8 @@
-package com.sample;
+package com.amplicode.ldapdemo;
 
 
-import com.sample.user.management.Role;
-import com.sample.user.management.User;
+import com.amplicode.ldapdemo.user.management.Role;
+import com.amplicode.ldapdemo.user.management.User;
 import lombok.RequiredArgsConstructor;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;

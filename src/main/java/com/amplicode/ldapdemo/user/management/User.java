@@ -1,4 +1,4 @@
-package com.sample.user.management;
+package com.amplicode.ldapdemo.user.management;
 
 import com.amplicode.ldap.userdetails.UserDetailsSetters;
 import lombok.Getter;

@@ -1,4 +1,4 @@
-package com.sample.user.management;
+package com.amplicode.ldapdemo.user.management;
 
 import lombok.SneakyThrows;
 import org.springframework.security.core.GrantedAuthority;

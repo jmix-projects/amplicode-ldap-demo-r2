@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.sample.graphql;
+package com.amplicode.ldapdemo.graphql;
 
 import graphql.ErrorClassification;
 

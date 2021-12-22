@@ -1,4 +1,4 @@
-package com.sample.config;
+package com.amplicode.ldapdemo.config;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpStatus;

@@ -1,6 +1,6 @@
-package com.sample.config;
+package com.amplicode.ldapdemo.config;
 
-import com.sample.AppProperties;
+import com.amplicode.ldapdemo.AppProperties;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.cors.CorsConfiguration;

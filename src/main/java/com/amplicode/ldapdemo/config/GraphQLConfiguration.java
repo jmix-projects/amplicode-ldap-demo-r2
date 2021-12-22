@@ -1,6 +1,6 @@
-package com.sample.config;
+package com.amplicode.ldapdemo.config;
 
-import com.sample.graphql.ErrorType;
+import com.amplicode.ldapdemo.graphql.ErrorType;
 import graphql.GraphQLError;
 import graphql.GraphqlErrorBuilder;
 import graphql.execution.DataFetcherResult;
