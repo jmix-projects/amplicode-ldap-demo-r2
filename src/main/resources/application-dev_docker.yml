@@ -10,7 +10,7 @@ amplicode:
     urls: ldap://${LDAP_HOSTNAME}:${LDAP_PORT}
     master-user-dn: cn=${LDAP_ADMIN_USERNAME},${LDAP_BASE_DN}
     master-user-password: ${LDAP_ADMIN_PASSWORD}
-    standard-authentication-users: admin
+    standard-authentication-users: ${APP_LDAP_MANAGER_USERNAME:admin}
     user-props:
       search-base: ou=users
       username-attr: uid

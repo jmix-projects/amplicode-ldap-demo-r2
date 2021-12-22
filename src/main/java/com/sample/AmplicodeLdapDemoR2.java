@@ -1,50 +1,22 @@
 package com.sample;
 
-
-import com.sample.properties.DemoConfigProperties;
-import com.sample.user.management.Role;
-import com.sample.user.management.User;
-import lombok.RequiredArgsConstructor;
-import org.springframework.boot.CommandLineRunner;
+import com.sample.user.LdapManagerUserInitializer;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.boot.context.properties.ConfigurationPropertiesScan;
-import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.security.provisioning.UserDetailsManager;
-import org.springframework.transaction.support.TransactionTemplate;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.event.ContextRefreshedEvent;
+import org.springframework.context.event.EventListener;
 
-import java.util.Collections;
-
-@RequiredArgsConstructor
-@ConfigurationPropertiesScan
 @SpringBootApplication
-public class AmplicodeLdapDemoR2 implements CommandLineRunner {
-
-    private static final String LDAP_MANAGER_ROLE = "LDAP_MANAGER";
-
-    final UserDetailsManager manager;
-    final TransactionTemplate tt;
-    final PasswordEncoder passwordEncoder;
-    final DemoConfigProperties demoConfigProperties;
+public class AmplicodeLdapDemoR2 {
 
     public static void main(String[] args) {
         SpringApplication.run(AmplicodeLdapDemoR2.class, args);
     }
 
-    @Override
-    public void run(String... args) {
-        tt.executeWithoutResult(status -> {
-            String ldapManagerUsername = demoConfigProperties.getLdapManagerUsername();
-            String ldapManagerPassword = demoConfigProperties.getLdapManagerPassword();
-            if (!manager.userExists(ldapManagerUsername)) {
-                User user = new User();
-                user.setUsername(ldapManagerUsername);
-                user.setPassword(passwordEncoder.encode(ldapManagerPassword));
-                Role role = new Role();
-                role.setAuthority(LDAP_MANAGER_ROLE);
-                user.setRoles(Collections.singleton(role));
-                manager.createUser(user);
-            }
-        });
+    @EventListener(ContextRefreshedEvent.class)
+    public void initAdmin(ContextRefreshedEvent event) {
+        ApplicationContext context = event.getApplicationContext();
+        context.getBean(LdapManagerUserInitializer.class).initialize();
     }
 }

@@ -5,8 +5,8 @@ networks:
     driver: bridge
 
 services:
-  backend-postgres-12:
-    container_name: backend-postgres-12
+  amplicode-ldap-postgres:
+    container_name: amplicode-ldap-postgres
     image: postgres:12
     restart: unless-stopped
     environment:
@@ -18,49 +18,51 @@ services:
     networks:
       - amplicode-ldap-net
 
-  openldap:
-    image: bitnami/openldap:2.5.9
-    container_name: openldap
-    ports:
-      - '1389:1389'
-      - '1636:1636'
-    environment:
-      LDAP_ADMIN_DN: ${LDAP_ADMIN_USERNAME}
-      LDAP_ADMIN_PASSWORD: ${LDAP_ADMIN_PASSWORD}
-      LDAP_ROOT: ${LDAP_ROOT}
-      LDAP_CUSTOM_LDIF_DIR: "etc/ldifs"
-    restart: unless-stopped
-    volumes:
-      - '../ldifs:/etc/ldifs/'
-    networks:
-      - amplicode-ldap-net
+  amplicode-ldap-openldap:
+      image: bitnami/openldap:2.5.9
+      container_name: amplicode-ldap-openldap
+      ports:
+        - '1389:1389'
+        - '1636:1636'
+      environment:
+        LDAP_ADMIN_DN: ${LDAP_ADMIN_USERNAME}
+        LDAP_ADMIN_PASSWORD: ${LDAP_ADMIN_PASSWORD}
+        LDAP_ROOT: ${LDAP_ROOT}
+        LDAP_CUSTOM_LDIF_DIR: "etc/ldifs"
+      restart: unless-stopped
+      volumes:
+        - '../ldifs:/etc/ldifs/'
+      networks:
+        - amplicode-ldap-net
 
   amplicode-ldap-be:
-    container_name: amplicode-ldap-be
-    build:
-      context: ../../
-      dockerfile: Dockerfile
-    image: amplicode-ldap-demo-r2:latest
-    restart: unless-stopped
-    environment:
-      RDS_HOSTNAME: backend-postgres-12
-      RDS_PASSWORD: ${DB_PASSWORD}
-      RDS_USERNAME: ${DB_USERNAME}
-      RDS_DB_NAME: ${DB_NAME}
-      RDS_PORT: 5432
-      LDAP_BASE_DN: ${LDAP_ROOT}
-      LDAP_ADMIN_USERNAME: ${LDAP_ADMIN_USERNAME}
-      LDAP_ADMIN_PASSWORD: ${LDAP_ADMIN_PASSWORD}
-      LDAP_HOSTNAME: openldap
-      LDAP_PORT: 1389
-      SPRING_PROFILES_ACTIVE: dev_docker
-    ports:
-      - "8083:8080"
-    depends_on:
-      - backend-postgres-12
-      - openldap
-    networks:
-      - amplicode-ldap-net
+      container_name: amplicode-ldap-be
+      build:
+        context: ../../
+        dockerfile: Dockerfile
+      image: amplicode-ldap-demo-r2:latest
+      restart: unless-stopped
+      environment:
+        RDS_HOSTNAME: amplicode-ldap-postgres
+        RDS_PASSWORD: ${DB_PASSWORD}
+        RDS_USERNAME: ${DB_USERNAME}
+        RDS_DB_NAME: ${DB_NAME}
+        RDS_PORT: 5432
+        LDAP_BASE_DN: ${LDAP_ROOT}
+        LDAP_ADMIN_USERNAME: ${LDAP_ADMIN_USERNAME}
+        LDAP_ADMIN_PASSWORD: ${LDAP_ADMIN_PASSWORD}
+        LDAP_HOSTNAME: amplicode-ldap-openldap
+        LDAP_PORT: 1389
+        SPRING_PROFILES_ACTIVE: dev_docker
+        APP_LDAP_MANAGER_USERNAME: ${APP_LDAP_MANAGER_USERNAME}
+        APP_LDAP_MANAGER_PASSWORD: ${APP_LDAP_MANAGER_PASSWORD}
+      ports:
+        - "8083:8080"
+      depends_on:
+        - amplicode-ldap-postgres
+        - amplicode-ldap-openldap
+      networks:
+        - amplicode-ldap-net
 
   amplicode-ldap-fe:
     container_name: amplicode-ldap-fe
