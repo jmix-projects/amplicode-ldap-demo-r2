@@ -30,3 +30,6 @@ amplicode:
 logging:
   level:
     com.amplicode: trace
+app:
+  ldap-manager-username: ldap_admin
+  ldap-manager-password: root

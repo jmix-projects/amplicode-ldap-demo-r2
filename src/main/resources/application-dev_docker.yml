@@ -31,3 +31,6 @@ amplicode:
 logging:
   level:
     com.amplicode: trace
+app:
+  ldap-manager-username: ${APP_LDAP_MANAGER_USERNAME:admin}
+  ldap-manager-password: ${APP_LDAP_MANAGER_PASSWORD:admin}

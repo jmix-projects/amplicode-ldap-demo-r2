@@ -23,6 +23,8 @@ dependencies {
     implementation(platform("com.amplicode.bom:amplicode-bom:0.1.1-SNAPSHOT"))
     implementation(platform("org.springframework.boot:spring-boot-dependencies"))
 
+    annotationProcessor 'org.springframework.boot:spring-boot-configuration-processor:2.6.1'
+
     compileOnly 'org.projectlombok:lombok:1.18.22'
     annotationProcessor 'org.projectlombok:lombok:1.18.22'
 
@@ -35,3 +37,5 @@ dependencies {
     //todo remove
     implementation 'com.graphql-java:graphiql-spring-boot-starter:5.0.2'
 }
+
+compileJava.dependsOn(processResources)

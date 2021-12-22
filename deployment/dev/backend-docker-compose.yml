@@ -54,6 +54,8 @@ services:
       LDAP_HOSTNAME: openldap
       LDAP_PORT: 1389
       SPRING_PROFILES_ACTIVE: dev_docker
+      APP_LDAP_MANAGER_USERNAME: ${APP_LDAP_MANAGER_USERNAME}
+      APP_LDAP_MANAGER_PASSWORD: ${APP_LDAP_MANAGER_PASSWORD}
     ports:
       - "8083:8080"
     depends_on:
