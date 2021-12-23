@@ -1,6 +1,6 @@
 {
-  "short_name": "new-ldap-addon-demo",
-  "name": "New-ldap-addon-demo Application",
+  "short_name": "amplicode-ldap-demo-r2",
+  "name": "Amplicode-ldap-demo-r2 Application",
   "icons": [
     {
       "src": "favicon.ico",
