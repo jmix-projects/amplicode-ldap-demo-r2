@@ -20,9 +20,9 @@ services:
     image: bitnami/openldap:2.5.9
     container_name: amplicode-addons-ldap-demo-r2-openldap
     environment:
-      LDAP_ADMIN_DN: ${LDAP_ADMIN_USERNAME}
-      LDAP_ADMIN_PASSWORD: ${LDAP_ADMIN_PASSWORD}
-      LDAP_ROOT: ${LDAP_ROOT}
+      LDAP_ADMIN_DN: ${GRANT2_USERNAME}
+      LDAP_ADMIN_PASSWORD: ${GRANT2_PASSWORD}
+      LDAP_ROOT: dc=amplicode,dc=com
       LDAP_CUSTOM_LDIF_DIR: "etc/ldifs"
     restart: unless-stopped
     volumes:
@@ -40,9 +40,9 @@ services:
       RDS_USERNAME: ${GRANT2_USERNAME}
       RDS_DB_NAME: ${GRANT2_NAME}
       RDS_PORT: 5432
-      LDAP_BASE_DN: ${LDAP_ROOT}
-      LDAP_ADMIN_USERNAME: ${LDAP_ADMIN_USERNAME}
-      LDAP_ADMIN_PASSWORD: ${LDAP_ADMIN_PASSWORD}
+      LDAP_BASE_DN: dc=amplicode,dc=com
+      LDAP_ADMIN_USERNAME: ${GRANT2_USERNAME}
+      LDAP_ADMIN_PASSWORD: ${GRANT2_PASSWORD}
       LDAP_HOSTNAME: amplicode-addons-ldap-demo-r2-openldap
       LDAP_PORT: 1389
       SPRING_PROFILES_ACTIVE: docker
