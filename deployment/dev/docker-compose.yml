@@ -20,7 +20,7 @@ services:
 
   amplicode-addons-ldap-demo-r2-openldap:
     image: bitnami/openldap:2.5.9
-    container_name: openldap
+    container_name: amplicode-addons-ldap-demo-r2-openldap
     environment:
       LDAP_ADMIN_DN: ${LDAP_ADMIN_USERNAME}
       LDAP_ADMIN_PASSWORD: ${LDAP_ADMIN_PASSWORD}
@@ -51,8 +51,6 @@ services:
       LDAP_HOSTNAME: amplicode-addons-ldap-demo-r2-openldap
       LDAP_PORT: 1389
       SPRING_PROFILES_ACTIVE: dev_docker
-      APP_USERS_ADMIN_USERNAME: ${JMIX_ADMIN}
-      APP_USERS_ADMIN_PASSWORD: ${JMIX_PASSWORD}
     depends_on:
       - amplicode-addons-ldap-demo-r2-postgres-12
       - amplicode-addons-ldap-demo-r2-openldap

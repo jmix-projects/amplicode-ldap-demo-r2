@@ -1,0 +1,2 @@
+amplicodegen react-typescript:addon --dest . --addonPackageName amplicode-ldap
+

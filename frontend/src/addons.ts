@@ -1,1 +1,2 @@
+import "amplicode-ldap";
 export {};
