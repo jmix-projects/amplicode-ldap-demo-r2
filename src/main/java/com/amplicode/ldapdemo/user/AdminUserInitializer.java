@@ -30,15 +30,15 @@ public class AdminUserInitializer {
 
     public void initialize() {
         transactionTemplate.executeWithoutResult(s -> {
-            String ldapManagerUsername = appProperties.getUsers().getAdmin().getUsername();
-            String ldapManagerPassword = appProperties.getUsers().getAdmin().getPassword();
-            if (!ldapManagerPassword.startsWith(NOOP_PREFIX)) {
-                ldapManagerPassword = NOOP_PREFIX + ldapManagerPassword;
+            String adminUsername = appProperties.getUsers().getAdmin().getUsername();
+            String adminPassword = appProperties.getUsers().getAdmin().getPassword();
+            if (!adminPassword.startsWith(NOOP_PREFIX)) {
+                adminPassword = NOOP_PREFIX + adminPassword;
             }
-            if (!userDetailsManager.userExists(ldapManagerUsername)) {
+            if (!userDetailsManager.userExists(adminUsername)) {
                 User user = new User();
-                user.setUsername(ldapManagerUsername);
-                user.setPassword(ldapManagerPassword);
+                user.setUsername(adminUsername);
+                user.setPassword(adminPassword);
                 Role role = new Role();
                 role.setAuthority(LdapAuthorities.ROLE_LDAP_MANAGER);
                 user.setRoles(Collections.singleton(role));
