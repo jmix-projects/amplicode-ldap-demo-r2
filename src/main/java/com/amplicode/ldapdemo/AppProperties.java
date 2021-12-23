@@ -72,9 +72,6 @@ public class AppProperties {
             this.password = password;
         }
 
-        public UserCredentials() {
-        }
-
         public String getUsername() {
             return username;
         }
