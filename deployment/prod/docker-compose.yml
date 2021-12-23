@@ -26,7 +26,7 @@ services:
       LDAP_CUSTOM_LDIF_DIR: "etc/ldifs"
     restart: unless-stopped
     volumes:
-      - '../ldifs:/etc/ldifs/'
+      - './ldifs:/etc/ldifs/'
     networks:
       - amplicode-addons-ldap-demo-r2-net
 
