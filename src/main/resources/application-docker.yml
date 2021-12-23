@@ -9,6 +9,7 @@ amplicode:
     urls: ldap://${LDAP_HOSTNAME}:${LDAP_PORT}
     master-user-dn: cn=${LDAP_ADMIN_USERNAME},${LDAP_BASE_DN}
     master-user-password: ${LDAP_ADMIN_PASSWORD}
+    standard-authentication-users: ${LDAP_STANDARD_USERS}
     user-props:
       search-base: ou=users
       username-attr: uid
@@ -22,8 +23,3 @@ amplicode:
       perform-from-groups:
         - 'cn=developers,ou=groups,${LDAP_BASE_DN}'
         - 'cn=managers,ou=groups,${LDAP_BASE_DN}'
-app:
-  users:
-    admin:
-      username: ${APP_USERS_ADMIN_USERNAME}
-      password: ${APP_USERS_ADMIN_PASSWORD}

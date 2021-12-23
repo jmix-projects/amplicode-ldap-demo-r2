@@ -13,7 +13,7 @@ amplicode:
     urls: ldap://localhost:1389
     master-user-dn: 'uid=admin,ou=system'
     master-user-password: admin
-    standard-authentication-users: ${app.users.admin.username}
+    standard-authentication-users: admin
     user-props:
       search-base: ou=users
       username-attr: uid
@@ -33,8 +33,4 @@ amplicode:
 logging:
   level:
     com.amplicode: trace
-app:
-  users:
-    admin:
-      username: admin
-      password: admin
+
