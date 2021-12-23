@@ -1,21 +1,8 @@
+# This file was automatically generated. Do not edit manually.
+
 schema {
     query: Query
     mutation: Mutation
-}
-
-"Mutation root"
-type Mutation {
-    deleteMatchingRule(id: Long!): Boolean!
-    updateConnectionSettings(connectionSettings: ConnectionSettingsDtoInput!): ConnectionSettingsDto!
-    updateMatchingRule(matchingRule: MatchingRuleDtoInput!): MatchingRuleDto!
-}
-
-"Query root"
-type Query {
-    connectionSettings: ConnectionSettingsDto!
-    findMatchingRule(id: Long!): MatchingRuleDto!
-    ldapLogEventList: [LdapLogEventDto!]!
-    listMatchingRules: [MatchingRuleDto!]!
 }
 
 type ConnectionSettingsDto {
@@ -38,12 +25,26 @@ type LdapLogEventDto {
 }
 
 type MatchingRuleDto {
-    id: Long
-    entityAttribute: String!
-    ldapAttribute: String!
     description: String
+    entityAttribute: String!
+    id: Long
+    ldapAttribute: String!
 }
 
+"Mutation root"
+type Mutation {
+    deleteMatchingRule(id: Long): Boolean!
+    updateConnectionSettings(connectionSettings: ConnectionSettingsDtoInput): ConnectionSettingsDto
+    updateMatchingRule(matchingRule: MatchingRuleDtoInput): MatchingRuleDto
+}
+
+"Query root"
+type Query {
+    connectionSettings: ConnectionSettingsDto
+    findMatchingRule(id: Long): MatchingRuleDto
+    ldapLogEventList: [LdapLogEventDto]
+    listMatchingRules: [MatchingRuleDto]
+}
 
 enum LogLevel {
     DEBUG
@@ -53,20 +54,6 @@ enum LogLevel {
     OFF
     TRACE
     WARN
-}
-
-input ConnectionSettingsDtoInput {
-    baseDn: String!
-    connectionDomainName: String!
-    connectionPassword: String!
-    urls: [String!]!
-}
-
-input MatchingRuleDtoInput {
-    id: Long
-    entityAttribute: String!
-    ldapAttribute: String!
-    description: String
 }
 
 "BigDecimal"
@@ -116,3 +103,21 @@ scalar UUID
 
 "Void"
 scalar Void
+
+input ConnectionSettingsDtoInput {
+    baseDn: String!
+    connectionDomainName: String!
+    connectionPassword: String!
+    urls: [StringInput!]!
+}
+
+input MatchingRuleDtoInput {
+    description: String
+    entityAttribute: String!
+    id: Long
+    ldapAttribute: String!
+}
+
+input StringInput {
+    hash: Int!
+}

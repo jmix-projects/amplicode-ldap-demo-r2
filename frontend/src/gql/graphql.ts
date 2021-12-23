@@ -63,7 +63,7 @@ export type ConnectionSettingsDtoInput = {
   baseDn: Scalars["String"];
   connectionDomainName: Scalars["String"];
   connectionPassword: Scalars["String"];
-  urls: Array<Scalars["String"]>;
+  urls: Array<StringInput>;
 };
 
 export type LdapLogEventDto = {
@@ -108,35 +108,39 @@ export type MatchingRuleDtoInput = {
 export type Mutation = {
   __typename?: "Mutation";
   deleteMatchingRule: Scalars["Boolean"];
-  updateConnectionSettings: ConnectionSettingsDto;
-  updateMatchingRule: MatchingRuleDto;
+  updateConnectionSettings?: Maybe<ConnectionSettingsDto>;
+  updateMatchingRule?: Maybe<MatchingRuleDto>;
 };
 
 /** Mutation root */
 export type MutationDeleteMatchingRuleArgs = {
-  id: Scalars["Long"];
+  id?: InputMaybe<Scalars["Long"]>;
 };
 
 /** Mutation root */
 export type MutationUpdateConnectionSettingsArgs = {
-  connectionSettings: ConnectionSettingsDtoInput;
+  connectionSettings?: InputMaybe<ConnectionSettingsDtoInput>;
 };
 
 /** Mutation root */
 export type MutationUpdateMatchingRuleArgs = {
-  matchingRule: MatchingRuleDtoInput;
+  matchingRule?: InputMaybe<MatchingRuleDtoInput>;
 };
 
 /** Query root */
 export type Query = {
   __typename?: "Query";
-  connectionSettings: ConnectionSettingsDto;
-  findMatchingRule: MatchingRuleDto;
-  ldapLogEventList: Array<LdapLogEventDto>;
-  listMatchingRules: Array<MatchingRuleDto>;
+  connectionSettings?: Maybe<ConnectionSettingsDto>;
+  findMatchingRule?: Maybe<MatchingRuleDto>;
+  ldapLogEventList?: Maybe<Array<Maybe<LdapLogEventDto>>>;
+  listMatchingRules?: Maybe<Array<Maybe<MatchingRuleDto>>>;
 };
 
 /** Query root */
 export type QueryFindMatchingRuleArgs = {
-  id: Scalars["Long"];
+  id?: InputMaybe<Scalars["Long"]>;
+};
+
+export type StringInput = {
+  hash: Scalars["Int"];
 };

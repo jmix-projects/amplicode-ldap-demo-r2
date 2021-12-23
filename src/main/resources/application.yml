@@ -3,7 +3,10 @@ spring:
     url: jdbc:postgresql://localhost:5432/amplicode-ldap-demo
     username: root
     password: root
-    driver-class-name: org.postgresql.Driver
+  liquibase:
+    change-log: classpath:db/changelog.xml
+  jpa:
+    open-in-view: false
 amplicode:
   ldap:
     base-dn: dc=amplicode,dc=com
@@ -30,6 +33,4 @@ amplicode:
 logging:
   level:
     com.amplicode: trace
-app:
-  ldap-manager-username: ldap_admin
-  ldap-manager-password: root
+

@@ -1,4 +1,4 @@
-package com.sample.user.management;
+package com.amplicode.ldapdemo.user.management;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 

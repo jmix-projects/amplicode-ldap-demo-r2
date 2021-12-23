@@ -1,41 +1,47 @@
 plugins {
     id 'org.springframework.boot' version '2.6.1'
+    id 'io.spring.dependency-management' version '1.0.11.RELEASE'
     id 'java'
 }
 
-group = 'com.sample'
+group = 'com.example'
 version = '0.0.1-SNAPSHOT'
-java {
-    sourceCompatibility = JavaVersion.VERSION_11
-    targetCompatibility = JavaVersion.VERSION_11
-}
+
+sourceCompatibility = '1.8'
 
 repositories {
-    mavenLocal()
     mavenCentral()
     maven {
         url 'https://nexus.amplicode.com/repository/public/'
     }
 }
 
-
-dependencies {
-    implementation(platform("com.amplicode.bom:amplicode-bom:0.1.1-SNAPSHOT"))
-    implementation(platform("org.springframework.boot:spring-boot-dependencies"))
-
-    annotationProcessor 'org.springframework.boot:spring-boot-configuration-processor:2.6.1'
-
-    compileOnly 'org.projectlombok:lombok:1.18.22'
-    annotationProcessor 'org.projectlombok:lombok:1.18.22'
-
-    implementation 'com.amplicode.ldap:amplicode-ldap-starter'
-    implementation 'org.springframework.boot:spring-boot-starter-web'
-    implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
-    implementation 'org.liquibase:liquibase-core'
-    runtimeOnly 'org.postgresql:postgresql'
-
-    //todo remove
-    implementation 'com.graphql-java:graphiql-spring-boot-starter:5.0.2'
+dependencyManagement {
+    imports {
+        mavenBom 'com.amplicode.bom:amplicode-bom:0.1.1-SNAPSHOT'
+    }
 }
 
-compileJava.dependsOn(processResources)
+dependencies {
+    implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+    implementation 'org.springframework.boot:spring-boot-starter-security'
+    implementation 'org.springframework.boot:spring-boot-starter-validation'
+    implementation 'org.springframework.boot:spring-boot-starter-web'
+    implementation 'org.liquibase:liquibase-core'
+
+    implementation 'com.amplicode.ldap:amplicode-ldap-starter'
+
+    runtimeOnly 'org.postgresql:postgresql'
+}
+
+bootBuildImage {
+    if (rootProject.hasProperty('dockerTag')) {
+        imageName = rootProject['dockerTag']
+    } else {
+        if (rootProject.hasProperty("includeFrontend")) {
+            imageName = 'amplicode-addons-ldap-demo-r2:full'
+        } else {
+            imageName = 'amplicode-addons-ldap-demo-r2:backend'
+        }
+    }
+}
