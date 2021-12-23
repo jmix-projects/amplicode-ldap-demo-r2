@@ -13,12 +13,17 @@ amplicode:
       search-base: ou=users
       username-attr: uid
     group-props:
-        member-attr: member
-        name-attr: cn
-        search-base: ou=groups
+      member-attr: member
+      name-attr: cn
+      search-base: ou=groups
     synchronization:
-        enabled: true
-        enabled-on-login: true
-        perform-from-groups:
-          - 'cn=developers,ou=groups,${LDAP_BASE_DN}'
-          - 'cn=managers,ou=groups,${LDAP_BASE_DN}'
+      enabled: true
+      enabled-on-login: true
+      perform-from-groups:
+        - 'cn=developers,ou=groups,${LDAP_BASE_DN}'
+        - 'cn=managers,ou=groups,${LDAP_BASE_DN}'
+app:
+  users:
+    admin:
+      username: ${APP_USERS_ADMIN_USERNAME}
+      password: ${APP_USERS_ADMIN_PASSWORD}

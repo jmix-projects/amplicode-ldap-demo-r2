@@ -1,6 +1,5 @@
 package com.amplicode.ldapdemo.user.management;
 
-import lombok.SneakyThrows;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -24,7 +23,6 @@ public class RepositoryUserDetailsManager implements UserDetailsManager {
         this.roleRepository = roleRepository;
     }
 
-    @SneakyThrows
     private Role createOrLoadRole(String authority) {
         Role byAuthority = roleRepository.findByAuthority(authority);
         if (byAuthority != null) {

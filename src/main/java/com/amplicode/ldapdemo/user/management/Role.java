@@ -1,8 +1,5 @@
 package com.amplicode.ldapdemo.user.management;
 
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
 import org.hibernate.Hibernate;
 import org.springframework.security.core.GrantedAuthority;
 
@@ -14,9 +11,6 @@ import javax.persistence.Index;
 import javax.persistence.Table;
 import java.util.Objects;
 
-@Getter
-@Setter
-@NoArgsConstructor
 @Table(name = "ROLES", indexes = {
         @Index(name = "IDX_ROLE_AUTHORITY", columnList = "AUTHORITY")
 })
@@ -30,6 +24,26 @@ public class Role implements GrantedAuthority {
 
     @Column(name = "AUTHORITY", unique = true)
     private String authority;
+
+    public Role() {
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    @Override
+    public String getAuthority() {
+        return authority;
+    }
+
+    public void setAuthority(String authority) {
+        this.authority = authority;
+    }
 
     @Override
     public String toString() {
