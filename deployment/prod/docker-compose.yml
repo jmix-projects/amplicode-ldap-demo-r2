@@ -20,7 +20,7 @@ services:
     image: bitnami/openldap:2.5.9
     container_name: amplicode-addons-ldap-demo-r2-openldap
     environment:
-      LDAP_ADMIN_DN: ${GRANT2_USERNAME}
+      LDAP_ADMIN_USERNAME: ${GRANT2_USERNAME}
       LDAP_ADMIN_PASSWORD: ${GRANT2_PASSWORD}
       LDAP_ROOT: dc=amplicode,dc=com
       LDAP_CUSTOM_LDIF_DIR: "etc/ldifs"
