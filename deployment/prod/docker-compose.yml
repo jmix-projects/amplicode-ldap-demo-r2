@@ -27,8 +27,6 @@ services:
     restart: unless-stopped
     volumes:
       - './ldifs:/etc/ldifs/'
-    ports:
-      - "11389:1389"
     networks:
       - amplicode-addons-ldap-demo-r2-net
 
