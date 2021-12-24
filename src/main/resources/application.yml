@@ -11,9 +11,9 @@ amplicode:
   ldap:
     base-dn: dc=amplicode,dc=com
     urls: ldap://localhost:1389
-    master-user-dn: 'uid=admin,ou=system'
-    master-user-password: admin
     standard-authentication-users: admin
+    master-user-dn: 'cn=${amplicode.ldap.standard-authentication-users},${amplicode.ldap.base-dn}'
+    master-user-password: admin
     user-props:
       search-base: ou=users
       username-attr: uid
@@ -21,6 +21,9 @@ amplicode:
       member-attr: member
       name-attr: cn
       search-base: ou=groups
+    authorities-populator:
+      authority-name-prefix: 'ROLE_'
+      convert-role-to-upper-case: true
     synchronization:
       perform-from-groups:
         - 'cn=developers,ou=groups,dc=amplicode,dc=com'

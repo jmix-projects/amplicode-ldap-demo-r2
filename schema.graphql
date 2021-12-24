@@ -53,6 +53,9 @@ type Query {
     ldapLogEventList: [LdapLogEventDto]
     listMatchingRules: [MatchingRuleDto]
     users: [UserDto]
+    whoAmI: String!
+    verifyManagersRole: Boolean
+    verifyDevelopersRole: Boolean
 }
 
 enum LogLevel {

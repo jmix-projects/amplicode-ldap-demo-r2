@@ -26,6 +26,7 @@
 
   "screen.home": "Home",
   "screen.users": "Users",
+  "screen.rolesVerification": "Roles Verification",
 
   "hotkeys.hotkeyInfo.title": "Keyboard Shortcuts",
   "hotkeys.hotkeyInfo.categoryName": "Shortcuts Help",

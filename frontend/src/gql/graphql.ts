@@ -138,10 +138,13 @@ export type MutationUpdateMatchingRuleArgs = {
 export type Query = {
   __typename?: "Query";
   connectionSettings?: Maybe<ConnectionSettingsDto>;
+  developersRoleAction?: Maybe<Scalars["Void"]>;
   findMatchingRule?: Maybe<MatchingRuleDto>;
   ldapLogEventList?: Maybe<Array<Maybe<LdapLogEventDto>>>;
   listMatchingRules?: Maybe<Array<Maybe<MatchingRuleDto>>>;
+  managersRoleAction?: Maybe<Scalars["Void"]>;
   users?: Maybe<Array<Maybe<UserDto>>>;
+  whoAmI: Scalars["String"];
 };
 
 /** Query root */
@@ -160,6 +163,26 @@ export type UserDto = {
   phone?: Maybe<Scalars["String"]>;
   roles?: Maybe<Array<Maybe<Scalars["String"]>>>;
   username: Scalars["String"];
+};
+
+export type WhoAmIQueryVariables = Exact<{ [key: string]: never }>;
+
+export type WhoAmIQuery = { __typename?: "Query"; whoAmI: string };
+
+export type DevelopersRoleActionQueryVariables = Exact<{
+  [key: string]: never;
+}>;
+
+export type DevelopersRoleActionQuery = {
+  __typename?: "Query";
+  developersRoleAction?: any | null | undefined;
+};
+
+export type ManagersRoleActionQueryVariables = Exact<{ [key: string]: never }>;
+
+export type ManagersRoleActionQuery = {
+  __typename?: "Query";
+  managersRoleAction?: any | null | undefined;
 };
 
 export type FindUsersQueryVariables = Exact<{ [key: string]: never }>;
@@ -192,6 +215,66 @@ export type DeleteUserMutation = {
   deleteUser?: any | null | undefined;
 };
 
+export const WhoAmIDocument = {
+  kind: "Document",
+  definitions: [
+    {
+      kind: "OperationDefinition",
+      operation: "query",
+      name: { kind: "Name", value: "whoAmI" },
+      selectionSet: {
+        kind: "SelectionSet",
+        selections: [
+          { kind: "Field", name: { kind: "Name", value: "whoAmI" } },
+        ],
+      },
+    },
+  ],
+} as unknown as DocumentNode<WhoAmIQuery, WhoAmIQueryVariables>;
+export const DevelopersRoleActionDocument = {
+  kind: "Document",
+  definitions: [
+    {
+      kind: "OperationDefinition",
+      operation: "query",
+      name: { kind: "Name", value: "developersRoleAction" },
+      selectionSet: {
+        kind: "SelectionSet",
+        selections: [
+          {
+            kind: "Field",
+            name: { kind: "Name", value: "developersRoleAction" },
+          },
+        ],
+      },
+    },
+  ],
+} as unknown as DocumentNode<
+  DevelopersRoleActionQuery,
+  DevelopersRoleActionQueryVariables
+>;
+export const ManagersRoleActionDocument = {
+  kind: "Document",
+  definitions: [
+    {
+      kind: "OperationDefinition",
+      operation: "query",
+      name: { kind: "Name", value: "managersRoleAction" },
+      selectionSet: {
+        kind: "SelectionSet",
+        selections: [
+          {
+            kind: "Field",
+            name: { kind: "Name", value: "managersRoleAction" },
+          },
+        ],
+      },
+    },
+  ],
+} as unknown as DocumentNode<
+  ManagersRoleActionQuery,
+  ManagersRoleActionQueryVariables
+>;
 export const FindUsersDocument = {
   kind: "Document",
   definitions: [

@@ -37,7 +37,8 @@ objectClass: person
 objectClass: top
 cn: First Person
 sn: Person
-telephoneNumber: 1-2332-234-000
+mail: first@test.mail
+telephoneNumber: +1-2345-678-900
 uid: first
 userPassword:: e01ENX1pd1RWNDNkZEtZNTRSVjc4WEtRRTFRPT0=
 
@@ -48,6 +49,6 @@ objectClass: person
 objectClass: top
 cn: Second Person
 sn: Person
-mail: test@test.mail
+mail: second@test.mail
 uid: second
 userPassword:: e01ENX1xZkRtR2hOOWhxcWR0VFJsNElBV0VnPT0=

@@ -3,18 +3,32 @@ import * as graphql from "./graphql";
 import { TypedDocumentNode as DocumentNode } from "@graphql-typed-document-node/core";
 
 const documents = {
-  "\r\n    query findUsers {\r\n        users {\r\n            id\r\n            username\r\n            email\r\n            phone\r\n            roles\r\n        }\r\n    }\r\n":
+  "\n    query whoAmI {\n        whoAmI\n    }\n": graphql.WhoAmIDocument,
+  "\n    query developersRoleAction {\n        developersRoleAction\n    }\n":
+    graphql.DevelopersRoleActionDocument,
+  "\n    query managersRoleAction {\n        managersRoleAction\n    }\n":
+    graphql.ManagersRoleActionDocument,
+  "\n    query findUsers {\n        users {\n            id\n            username\n            email\n            phone\n            roles\n        }\n    }\n":
     graphql.FindUsersDocument,
-  "\r\n    mutation deleteUser ($id: Long!) {\r\n        deleteUser(id: $id)\r\n    }\r\n":
+  "\n    mutation deleteUser ($id: Long!) {\n        deleteUser(id: $id)\n    }\n":
     graphql.DeleteUserDocument,
 };
 
 export function gql(
-  source: "\r\n    query findUsers {\r\n        users {\r\n            id\r\n            username\r\n            email\r\n            phone\r\n            roles\r\n        }\r\n    }\r\n"
-): typeof documents["\r\n    query findUsers {\r\n        users {\r\n            id\r\n            username\r\n            email\r\n            phone\r\n            roles\r\n        }\r\n    }\r\n"];
+  source: "\n    query whoAmI {\n        whoAmI\n    }\n"
+): typeof documents["\n    query whoAmI {\n        whoAmI\n    }\n"];
 export function gql(
-  source: "\r\n    mutation deleteUser ($id: Long!) {\r\n        deleteUser(id: $id)\r\n    }\r\n"
-): typeof documents["\r\n    mutation deleteUser ($id: Long!) {\r\n        deleteUser(id: $id)\r\n    }\r\n"];
+  source: "\n    query developersRoleAction {\n        developersRoleAction\n    }\n"
+): typeof documents["\n    query developersRoleAction {\n        developersRoleAction\n    }\n"];
+export function gql(
+  source: "\n    query managersRoleAction {\n        managersRoleAction\n    }\n"
+): typeof documents["\n    query managersRoleAction {\n        managersRoleAction\n    }\n"];
+export function gql(
+  source: "\n    query findUsers {\n        users {\n            id\n            username\n            email\n            phone\n            roles\n        }\n    }\n"
+): typeof documents["\n    query findUsers {\n        users {\n            id\n            username\n            email\n            phone\n            roles\n        }\n    }\n"];
+export function gql(
+  source: "\n    mutation deleteUser ($id: Long!) {\n        deleteUser(id: $id)\n    }\n"
+): typeof documents["\n    mutation deleteUser ($id: Long!) {\n        deleteUser(id: $id)\n    }\n"];
 
 export function gql(source: string): unknown;
 export function gql(source: string) {
