@@ -1,4 +1,5 @@
 /* eslint-disable */
+
 export type Maybe<T> = T | null;
 export type InputMaybe<T> = Maybe<T>;
 export type Exact<T extends { [key: string]: unknown }> = {
@@ -134,6 +135,7 @@ export type Query = {
   findMatchingRule?: Maybe<MatchingRuleDto>;
   ldapLogEventList?: Maybe<Array<Maybe<LdapLogEventDto>>>;
   listMatchingRules?: Maybe<Array<Maybe<MatchingRuleDto>>>;
+  users: Array<UserDto>;
 };
 
 /** Query root */
@@ -143,4 +145,12 @@ export type QueryFindMatchingRuleArgs = {
 
 export type StringInput = {
   hash: Scalars["Int"];
+};
+
+export type UserDto = {
+  __typename?: "UserDto";
+  email?: Maybe<Scalars["String"]>;
+  phone?: Maybe<Scalars["String"]>;
+  roles?: Maybe<Array<Maybe<Scalars["String"]>>>;
+  username: Scalars["String"];
 };
