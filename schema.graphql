@@ -4,7 +4,6 @@ schema {
     query: Query
     mutation: Mutation
 }
-
 type ConnectionSettingsDto {
     baseDn: String!
     connectionDomainName: String!
@@ -31,11 +30,20 @@ type MatchingRuleDto {
     ldapAttribute: String!
 }
 
+type UserDto {
+    id: Long!
+    username: String!
+    email: String
+    phone: String
+    roles: [String]
+}
+
 "Mutation root"
 type Mutation {
     deleteMatchingRule(id: Long): Boolean!
     updateConnectionSettings(connectionSettings: ConnectionSettingsDtoInput): ConnectionSettingsDto
     updateMatchingRule(matchingRule: MatchingRuleDtoInput): MatchingRuleDto
+    deleteUser(id: Long): Void
 }
 
 "Query root"
@@ -44,6 +52,7 @@ type Query {
     findMatchingRule(id: Long): MatchingRuleDto
     ldapLogEventList: [LdapLogEventDto]
     listMatchingRules: [MatchingRuleDto]
+    users: [UserDto]
 }
 
 enum LogLevel {
@@ -55,7 +64,6 @@ enum LogLevel {
     TRACE
     WARN
 }
-
 "BigDecimal"
 scalar BigDecimal
 

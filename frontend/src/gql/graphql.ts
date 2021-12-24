@@ -1,4 +1,5 @@
 /* eslint-disable */
+import { TypedDocumentNode as DocumentNode } from "@graphql-typed-document-node/core";
 export type Maybe<T> = T | null;
 export type InputMaybe<T> = Maybe<T>;
 export type Exact<T extends { [key: string]: unknown }> = {
@@ -108,12 +109,18 @@ export type MatchingRuleDtoInput = {
 export type Mutation = {
   __typename?: "Mutation";
   deleteMatchingRule: Scalars["Boolean"];
+  deleteUser?: Maybe<Scalars["Void"]>;
   updateConnectionSettings?: Maybe<ConnectionSettingsDto>;
   updateMatchingRule?: Maybe<MatchingRuleDto>;
 };
 
 /** Mutation root */
 export type MutationDeleteMatchingRuleArgs = {
+  id?: InputMaybe<Scalars["Long"]>;
+};
+
+/** Mutation root */
+export type MutationDeleteUserArgs = {
   id?: InputMaybe<Scalars["Long"]>;
 };
 
@@ -134,6 +141,7 @@ export type Query = {
   findMatchingRule?: Maybe<MatchingRuleDto>;
   ldapLogEventList?: Maybe<Array<Maybe<LdapLogEventDto>>>;
   listMatchingRules?: Maybe<Array<Maybe<MatchingRuleDto>>>;
+  users?: Maybe<Array<Maybe<UserDto>>>;
 };
 
 /** Query root */
@@ -144,3 +152,111 @@ export type QueryFindMatchingRuleArgs = {
 export type StringInput = {
   hash: Scalars["Int"];
 };
+
+export type UserDto = {
+  __typename?: "UserDto";
+  email?: Maybe<Scalars["String"]>;
+  id: Scalars["Long"];
+  phone?: Maybe<Scalars["String"]>;
+  roles?: Maybe<Array<Maybe<Scalars["String"]>>>;
+  username: Scalars["String"];
+};
+
+export type FindUsersQueryVariables = Exact<{ [key: string]: never }>;
+
+export type FindUsersQuery = {
+  __typename?: "Query";
+  users?:
+    | Array<
+        | {
+            __typename?: "UserDto";
+            id: any;
+            username: string;
+            email?: string | null | undefined;
+            phone?: string | null | undefined;
+            roles?: Array<string | null | undefined> | null | undefined;
+          }
+        | null
+        | undefined
+      >
+    | null
+    | undefined;
+};
+
+export type DeleteUserMutationVariables = Exact<{
+  id: Scalars["Long"];
+}>;
+
+export type DeleteUserMutation = {
+  __typename?: "Mutation";
+  deleteUser?: any | null | undefined;
+};
+
+export const FindUsersDocument = {
+  kind: "Document",
+  definitions: [
+    {
+      kind: "OperationDefinition",
+      operation: "query",
+      name: { kind: "Name", value: "findUsers" },
+      selectionSet: {
+        kind: "SelectionSet",
+        selections: [
+          {
+            kind: "Field",
+            name: { kind: "Name", value: "users" },
+            selectionSet: {
+              kind: "SelectionSet",
+              selections: [
+                { kind: "Field", name: { kind: "Name", value: "id" } },
+                { kind: "Field", name: { kind: "Name", value: "username" } },
+                { kind: "Field", name: { kind: "Name", value: "email" } },
+                { kind: "Field", name: { kind: "Name", value: "phone" } },
+                { kind: "Field", name: { kind: "Name", value: "roles" } },
+              ],
+            },
+          },
+        ],
+      },
+    },
+  ],
+} as unknown as DocumentNode<FindUsersQuery, FindUsersQueryVariables>;
+export const DeleteUserDocument = {
+  kind: "Document",
+  definitions: [
+    {
+      kind: "OperationDefinition",
+      operation: "mutation",
+      name: { kind: "Name", value: "deleteUser" },
+      variableDefinitions: [
+        {
+          kind: "VariableDefinition",
+          variable: { kind: "Variable", name: { kind: "Name", value: "id" } },
+          type: {
+            kind: "NonNullType",
+            type: { kind: "NamedType", name: { kind: "Name", value: "Long" } },
+          },
+        },
+      ],
+      selectionSet: {
+        kind: "SelectionSet",
+        selections: [
+          {
+            kind: "Field",
+            name: { kind: "Name", value: "deleteUser" },
+            arguments: [
+              {
+                kind: "Argument",
+                name: { kind: "Name", value: "id" },
+                value: {
+                  kind: "Variable",
+                  name: { kind: "Name", value: "id" },
+                },
+              },
+            ],
+          },
+        ],
+      },
+    },
+  ],
+} as unknown as DocumentNode<DeleteUserMutation, DeleteUserMutationVariables>;
