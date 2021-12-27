@@ -1,6 +1,8 @@
-package com.amplicode.ldapdemo.user;
+package com.amplicode.ldapdemo;
 
 import com.amplicode.ldap.security.LdapAuthorities;
+import com.amplicode.ldap.userdetails.matching.rules.MatchingRule;
+import com.amplicode.ldap.userdetails.matching.rules.MatchingRuleRepository;
 import com.amplicode.ldapdemo.AppProperties;
 import com.amplicode.ldapdemo.security.Authorities;
 import com.amplicode.ldapdemo.user.management.Role;
@@ -14,21 +16,24 @@ import java.util.LinkedHashSet;
 import java.util.Set;
 
 @Component
-public class AdminUserInitializer {
+public class DataInitializer {
     private static final String NOOP_PREFIX = "{noop}";
 
     private final TransactionTemplate transactionTemplate;
     private final UserDetailsManager userDetailsManager;
     private final AppProperties appProperties;
 
-    public AdminUserInitializer(TransactionTemplate transactionTemplate, UserDetailsManager userDetailsManager,
-                                AppProperties appProperties) {
+    private final MatchingRuleRepository matchingRuleRepository;
+
+    public DataInitializer(TransactionTemplate transactionTemplate, UserDetailsManager userDetailsManager,
+                           AppProperties appProperties, MatchingRuleRepository matchingRuleRepository) {
         this.transactionTemplate = transactionTemplate;
         this.userDetailsManager = userDetailsManager;
         this.appProperties = appProperties;
+        this.matchingRuleRepository = matchingRuleRepository;
     }
 
-    public void initialize() {
+    public void initAdminUser() {
         transactionTemplate.executeWithoutResult(s -> {
             String adminUsername = appProperties.getUsers().getAdmin().getUsername();
             String adminPassword = appProperties.getUsers().getAdmin().getPassword();
@@ -49,5 +54,13 @@ public class AdminUserInitializer {
                 userDetailsManager.createUser(user);
             }
         });
+    }
+
+    public void initMatchingRules() {
+        MatchingRule mr = new MatchingRule();
+        mr.setDescription("Entity \"email\" attribute to LDAP \"mail\" attribute mapping");
+        mr.setEntityAttribute("email");
+        mr.setLdapAttribute("mail");
+        matchingRuleRepository.save(mr);
     }
 }

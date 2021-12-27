@@ -4,10 +4,10 @@ import { TypedDocumentNode as DocumentNode } from "@graphql-typed-document-node/
 
 const documents = {
   "\n    query whoAmI {\n        whoAmI\n    }\n": graphql.WhoAmIDocument,
-  "\n    query developersRoleAction {\n        developersRoleAction\n    }\n":
-    graphql.DevelopersRoleActionDocument,
-  "\n    query managersRoleAction {\n        managersRoleAction\n    }\n":
-    graphql.ManagersRoleActionDocument,
+  "\n    query verifyDevelopersRole {\n        verifyDevelopersRole\n    }\n":
+    graphql.VerifyDevelopersRoleDocument,
+  "\n    query verifyManagersRole {\n        verifyManagersRole\n    }\n":
+    graphql.VerifyManagersRoleDocument,
   "\n    query findUsers {\n        users {\n            id\n            username\n            email\n            phone\n            roles\n        }\n    }\n":
     graphql.FindUsersDocument,
   "\n    mutation deleteUser ($id: Long!) {\n        deleteUser(id: $id)\n    }\n":
@@ -18,11 +18,11 @@ export function gql(
   source: "\n    query whoAmI {\n        whoAmI\n    }\n"
 ): typeof documents["\n    query whoAmI {\n        whoAmI\n    }\n"];
 export function gql(
-  source: "\n    query developersRoleAction {\n        developersRoleAction\n    }\n"
-): typeof documents["\n    query developersRoleAction {\n        developersRoleAction\n    }\n"];
+  source: "\n    query verifyDevelopersRole {\n        verifyDevelopersRole\n    }\n"
+): typeof documents["\n    query verifyDevelopersRole {\n        verifyDevelopersRole\n    }\n"];
 export function gql(
-  source: "\n    query managersRoleAction {\n        managersRoleAction\n    }\n"
-): typeof documents["\n    query managersRoleAction {\n        managersRoleAction\n    }\n"];
+  source: "\n    query verifyManagersRole {\n        verifyManagersRole\n    }\n"
+): typeof documents["\n    query verifyManagersRole {\n        verifyManagersRole\n    }\n"];
 export function gql(
   source: "\n    query findUsers {\n        users {\n            id\n            username\n            email\n            phone\n            roles\n        }\n    }\n"
 ): typeof documents["\n    query findUsers {\n        users {\n            id\n            username\n            email\n            phone\n            roles\n        }\n    }\n"];

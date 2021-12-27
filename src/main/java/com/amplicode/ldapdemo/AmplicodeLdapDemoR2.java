@@ -1,7 +1,6 @@
 package com.amplicode.ldapdemo;
 
 
-import com.amplicode.ldapdemo.user.AdminUserInitializer;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.context.properties.ConfigurationPropertiesScan;
@@ -18,6 +17,8 @@ public class AmplicodeLdapDemoR2 {
 
     @EventListener(ContextRefreshedEvent.class)
     public void onContextRefresh(ContextRefreshedEvent event) {
-        event.getApplicationContext().getBean(AdminUserInitializer.class).initialize();
+        DataInitializer dataInitializer = event.getApplicationContext().getBean(DataInitializer.class);
+        dataInitializer.initAdminUser();
+        dataInitializer.initMatchingRules();
     }
 }

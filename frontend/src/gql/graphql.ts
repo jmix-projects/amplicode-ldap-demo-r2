@@ -138,12 +138,12 @@ export type MutationUpdateMatchingRuleArgs = {
 export type Query = {
   __typename?: "Query";
   connectionSettings?: Maybe<ConnectionSettingsDto>;
-  developersRoleAction?: Maybe<Scalars["Void"]>;
   findMatchingRule?: Maybe<MatchingRuleDto>;
   ldapLogEventList?: Maybe<Array<Maybe<LdapLogEventDto>>>;
   listMatchingRules?: Maybe<Array<Maybe<MatchingRuleDto>>>;
-  managersRoleAction?: Maybe<Scalars["Void"]>;
   users?: Maybe<Array<Maybe<UserDto>>>;
+  verifyDevelopersRole?: Maybe<Scalars["Boolean"]>;
+  verifyManagersRole?: Maybe<Scalars["Boolean"]>;
   whoAmI: Scalars["String"];
 };
 
@@ -169,20 +169,20 @@ export type WhoAmIQueryVariables = Exact<{ [key: string]: never }>;
 
 export type WhoAmIQuery = { __typename?: "Query"; whoAmI: string };
 
-export type DevelopersRoleActionQueryVariables = Exact<{
+export type VerifyDevelopersRoleQueryVariables = Exact<{
   [key: string]: never;
 }>;
 
-export type DevelopersRoleActionQuery = {
+export type VerifyDevelopersRoleQuery = {
   __typename?: "Query";
-  developersRoleAction?: any | null | undefined;
+  verifyDevelopersRole?: boolean | null | undefined;
 };
 
-export type ManagersRoleActionQueryVariables = Exact<{ [key: string]: never }>;
+export type VerifyManagersRoleQueryVariables = Exact<{ [key: string]: never }>;
 
-export type ManagersRoleActionQuery = {
+export type VerifyManagersRoleQuery = {
   __typename?: "Query";
-  managersRoleAction?: any | null | undefined;
+  verifyManagersRole?: boolean | null | undefined;
 };
 
 export type FindUsersQueryVariables = Exact<{ [key: string]: never }>;
@@ -231,49 +231,49 @@ export const WhoAmIDocument = {
     },
   ],
 } as unknown as DocumentNode<WhoAmIQuery, WhoAmIQueryVariables>;
-export const DevelopersRoleActionDocument = {
+export const VerifyDevelopersRoleDocument = {
   kind: "Document",
   definitions: [
     {
       kind: "OperationDefinition",
       operation: "query",
-      name: { kind: "Name", value: "developersRoleAction" },
+      name: { kind: "Name", value: "verifyDevelopersRole" },
       selectionSet: {
         kind: "SelectionSet",
         selections: [
           {
             kind: "Field",
-            name: { kind: "Name", value: "developersRoleAction" },
+            name: { kind: "Name", value: "verifyDevelopersRole" },
           },
         ],
       },
     },
   ],
 } as unknown as DocumentNode<
-  DevelopersRoleActionQuery,
-  DevelopersRoleActionQueryVariables
+  VerifyDevelopersRoleQuery,
+  VerifyDevelopersRoleQueryVariables
 >;
-export const ManagersRoleActionDocument = {
+export const VerifyManagersRoleDocument = {
   kind: "Document",
   definitions: [
     {
       kind: "OperationDefinition",
       operation: "query",
-      name: { kind: "Name", value: "managersRoleAction" },
+      name: { kind: "Name", value: "verifyManagersRole" },
       selectionSet: {
         kind: "SelectionSet",
         selections: [
           {
             kind: "Field",
-            name: { kind: "Name", value: "managersRoleAction" },
+            name: { kind: "Name", value: "verifyManagersRole" },
           },
         ],
       },
     },
   ],
 } as unknown as DocumentNode<
-  ManagersRoleActionQuery,
-  ManagersRoleActionQueryVariables
+  VerifyManagersRoleQuery,
+  VerifyManagersRoleQueryVariables
 >;
 export const FindUsersDocument = {
   kind: "Document",
