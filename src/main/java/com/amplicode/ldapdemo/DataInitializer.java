@@ -58,9 +58,9 @@ public class DataInitializer {
 
     public void initMatchingRules() {
         MatchingRule mr = new MatchingRule();
-        mr.setDescription("Entity \"email\" attribute to LDAP \"mail\" attribute mapping");
-        mr.setEntityAttribute("email");
-        mr.setLdapAttribute("mail");
+        mr.setDescription("Entity \"phone\" attribute to LDAP \"telephoneNumber\" attribute mapping");
+        mr.setEntityAttribute("phone");
+        mr.setLdapAttribute("telephoneNumber");
         matchingRuleRepository.save(mr);
     }
 }
